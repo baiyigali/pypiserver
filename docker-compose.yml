@@ -8,17 +8,17 @@ services:
     command: htpasswd -cb /data/htpasswd pypiuser 123456
 
   osssync:
-    image: registry.cn-zhangjiakou.aliyuncs.com/baiyigali/osssync:v0.0.0.6
+    image: registry.cn-zhangjiakou.aliyuncs.com/baiyigali/osssync:v0.0.0.7
     container_name: osssync
     volumes:
-      - /home/baiyigali/workspace/pypiserver/packages:/app/data
+      - /home/baiyigali/workspace/pypiserver/packages:/data/packages
     environment:
       - OSS_ENDPOINT=<<OSS_ENDPOINT>>
       - OSS_ACCESS_KEY_ID=<<OSS_ACCESS_KEY_ID>>
       - OSS_ACCESS_KEY_SECRET=<<OSS_ACCESS_KEY_SECRET>>
       - OSS_BUCKET_NAME=<<OSS_BUCKET_NAME>>
       - OSS_DIR=
-      - LOCAL_DIR=/app/data
+      - LOCAL_DIR=/data/packages
     restart: unless-stopped
 
   pypi:
