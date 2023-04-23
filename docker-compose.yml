@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  pypi:
+    image: pypiserver/pypiserver:v1.5.1
+    ports:
+      - "80:8080"
+    volumes:
+      - ./packages:/data/packages
+      - ./htpasswd:/data/.htpasswd:ro
+    environment:
+      - PYPISERVER_PASSWORDS_FILE=/data/.htpasswd
+    restart: always
+    command: run -P /data/.htpasswd -a download /data/packages
