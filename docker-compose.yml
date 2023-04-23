@@ -6,10 +6,23 @@ services:
     volumes:
       - ./htpasswd:/etc/nginx/htpasswd
     command: htpasswd -cb /etc/nginx/htpasswd pypiuser 123456
+  osssync:
+    image: baigali/osssync:v0.0.0.3
+    volumes:
+      - /home/baiyigali/workspace/pypiserver/packages:/app/data
+    environment:
+      - OSS_ENDPOINT=<<OSS_ENDPOINT>>
+      - OSS_ACCESS_KEY_ID=<<OSS_ACCESS_KEY_ID>>
+      - OSS_ACCESS_KEY_SECRET=<<OSS_ACCESS_KEY_SECRET>>
+      - OSS_BUCKET_NAME=<<OSS_BUCKET_NAME>>
+      - OSS_DIR=
+      - LOCAL_DIR=/app/data
+    restart: unless-stopped
   pypi:
     image: pypiserver/pypiserver:v1.5.1
     depends_on:
       - setup
+      - osssync
     ports:
       - "4599:8080"
     volumes:
