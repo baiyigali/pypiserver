@@ -7,7 +7,7 @@ services:
       - ./htpasswd:/etc/nginx/htpasswd
     command: htpasswd -cb /etc/nginx/htpasswd pypiuser 123456
   osssync:
-    image: registry.cn-zhangjiakou.aliyuncs.com/baiyigali/osssync:v0.0.0.4
+    image: registry.cn-zhangjiakou.aliyuncs.com/baiyigali/osssync:v0.0.0.5
     volumes:
       - /home/baiyigali/workspace/pypiserver/packages:/app/data
     environment:
