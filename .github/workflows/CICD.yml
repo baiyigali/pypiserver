@@ -5,7 +5,7 @@ on:
     branches: ["main", "master" ]
 
 env:
-  SERVER_USERNAME: ${{ vars.SERVER_USERNAME }}
+  SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
   SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
   DEPLOY_FOLDER: "/home/baiyigali/workspace/pypiserver"
 
@@ -13,7 +13,7 @@ jobs:
   deploy_int:
     runs-on: ubuntu-latest
     env:
-      SERVER_IP: ${{ vars.SERVER_IP }}
+      SERVER_IP: ${{ secrets.SERVER_IP }}
 
     steps:
     - uses: actions/checkout@v3
