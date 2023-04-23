@@ -24,7 +24,7 @@ services:
       - setup
       - osssync
     ports:
-      - "4599:8080"
+      - "4500:8080"
     volumes:
       - ./packages:/data/packages
       - ./htpasswd:/data/.htpasswd:ro
