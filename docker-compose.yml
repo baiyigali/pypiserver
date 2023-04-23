@@ -8,6 +8,7 @@ services:
     command: htpasswd -cb /etc/nginx/htpasswd pypiuser 123456
   osssync:
     image: registry.cn-zhangjiakou.aliyuncs.com/baiyigali/osssync:v0.0.0.6
+    container_name: osssync
     volumes:
       - /home/baiyigali/workspace/pypiserver/packages:/app/data
     environment:
@@ -20,6 +21,7 @@ services:
     restart: unless-stopped
   pypi:
     image: pypiserver/pypiserver:v1.5.1
+    container_name: pypiserver
     depends_on:
       - setup
       - osssync
